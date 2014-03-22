@@ -13,6 +13,14 @@ namespace WpfRibbonApplication1
     {
         public int RotateAngle;
         public int UsingEdges;
+        public int UsingVirtualHeater;
+
+        public FormParas()
+        {
+            RotateAngle = 0;
+            UsingEdges = 1;
+            UsingVirtualHeater = 1;
+        }
     }
     public partial class Form1 : Form
     {
@@ -21,6 +29,7 @@ namespace WpfRibbonApplication1
         {
             this.paras = new FormParas();
             this.paras = paras;
+            
             InitializeComponent();
         }
 
@@ -38,16 +47,9 @@ namespace WpfRibbonApplication1
             MainWindow.WorkSpaceInstance.TowerModelInstance.VTKDrawModel(ref points, ref polys, ref scalars, ref pointsNum);
 
             Luk.SetNumberOfColors(10);
-            Luk.SetTableValue(0, 0, 0, 0, 1);  //Black
-            Luk.SetTableValue(1, 0.9804, 0.5020, 0.4471, 1); // Salmon
-            Luk.SetTableValue(2, 0.7400, 0.9900, 0.7900, 1); // Mint
-            Luk.SetTableValue(3, 0.9608, 0.8706, 0.7020, 1); // Wheat
-            Luk.SetTableValue(4, 0.2000, 0.6300, 0.7900, 1); // Peacock
-            Luk.SetTableValue(5, 0.5300, 0.1500, 0.3400, 1); // Raspberry
-            Luk.SetTableValue(6, 1.0000, 0.4900, 0.2500, 1); // Flesh
-            Luk.SetTableValue(7, 0.8900, 0.8100, 0.3400, 1); // Banana
-            Luk.SetTableValue(8, 1.0000, 0.3882, 0.2784, 1); // Tomato
-            Luk.SetTableValue(9, 0.9020, 0.9020, 0.9804, 1); // Lavender
+            Luk.SetTableValue(0, 0, 0, 0, 1);
+            Luk.SetTableValue(1, 0, 0, 1, 1);
+            Luk.SetTableValue(2, 0.133333, 0.545098, 0.133333, 1);
             Luk.Build();
             vtkPolyData profile = vtkPolyData.New();
            

@@ -46,9 +46,9 @@ namespace WpfRibbonApplication1
 
             Form1 form = new Form1(paras);
             form.TopLevel = false;
-            //winform.Child = form;
+            winform.Child = form;
         }
-        /*
+        
         #region Oridinary functions
         // This is a test function
         public void OpenProjButton_Click(object sender, RoutedEventArgs e)
@@ -148,7 +148,7 @@ namespace WpfRibbonApplication1
             form.TopLevel = false;
             winform.Child = form;
         }
-        */
+        
     }
 }
 

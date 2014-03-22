@@ -26,8 +26,27 @@
 						    <ColumnDefinition Width="0.17*"/>
 						    <ColumnDefinition Width="0.414*"/>
 					    </Grid.ColumnDefinitions>
-					    <Button x:Name="BuildNewProj" Content="新建工程" Margin="8.223,14.934,63.387,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="0"/>
-                        <Button x:Name="OpenProj" Content="打开工程" Margin="68.223,14.934,3.387,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="0" />
+                        <Button 
+                            x:Name="BuildNewProj" Content="新建工程" 
+                            Margin="8.223,14.934,63.387,31.066" Background="{x:Null}" 
+                            BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" 
+                            Height="64" Width="60" Grid.Column="0"
+                            Click="BuildNewProj_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <StackPanel VerticalAlignment="Center">
+                                        <Image Source="Images/BuildNewProj.png" Width="30" Height="30"/>
+                                        <TextBlock Text="文字" Width="30"/>
+                                    </StackPanel>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                            <Button x:Name="OpenProj" Content="打开工程" 
+                                Margin="68.223,14.934,3.387,31.066" 
+                                Background="{x:Null}" BorderBrush="{x:Null}" 
+                                Foreground="White" Style="{DynamicResource TabButton}" 
+                                Height="64" Width="60" Grid.Column="0"
+                                Click="OpenProjButton_Click"/>
 					    <Button x:Name="GridModel" Content="网络模型" HorizontalAlignment="Left" Margin="0.344,14.934,0,31.066" Width="60" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Grid.Column="1"/>
 					    <Button x:Name="SolidTranformModel" Content="固化变形模型" Margin="63.407,14.934,4.193,31.066" Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Large}" Height="64" Width="80"/>
 					    <Button x:Name="CopyAction" Content="复制" HorizontalAlignment="Left" Margin="0.87,14.756,0,31.243" Width="40" Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Medium}" Height="64" d:LayoutOverrides="VerticalMargin"/>
@@ -43,11 +62,13 @@
 					    <TextBlock Margin="0,0,0,9.99" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="编辑"/></TextBlock>
 					    <TextBlock Margin="0,0,0,9.986" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="3" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="坐标系统"/></TextBlock>
 					    <TextBlock Margin="0,0,0,9.983" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="4" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="高级功能"/></TextBlock>
-					    <Image Height="30" VerticalAlignment="Top" Width="30" HorizontalAlignment="Left" Source="Images/BuildNewProj.png" Margin="23.5,21,0,0" d:LayoutOverrides="VerticalAlignment">
+					    <!--
+                        <Image Height="30" VerticalAlignment="Top" Width="30" HorizontalAlignment="Left" Source="Images/BuildNewProj.png" Margin="23.5,21,0,0" d:LayoutOverrides="VerticalAlignment">
 						    <Image.OpacityMask>
 							    <ImageBrush ImageSource="Images/LargeIcon.png" Stretch="None"/>
 						    </Image.OpacityMask>
 					    </Image>
+                        -->
                         <Image Margin="0,21.75,15.648,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Right" Width="30">
 						    <Image.OpacityMask>
 							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
@@ -126,7 +147,12 @@
 						    <ColumnDefinition Width="290*"/>
 						    <ColumnDefinition Width="0*"/>
 					    </Grid.ColumnDefinitions>
-					    <Button x:Name="导入模型" Content="导入模型" Margin="86,15,189,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.ColumnSpan="2"/>
+					    <Button x:Name="导入模型" Content="导入模型" 
+                                Margin="86,15,189,31" Background="{x:Null}" 
+                                BorderBrush="{x:Null}" Foreground="White" 
+                                Style="{DynamicResource TabButton}" Height="64" Width="60" 
+                                Grid.ColumnSpan="2"
+                                Click="ImportModel_Click"/>
 					    <Button x:Name="BuildCoord_Copy" Content="主体材料" Margin="31,18,99,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Extra Small}" Width="88" Grid.Column="1"/>
 					    <Button x:Name="LookupCoord_Copy" Content="焊缝材料" Margin="32,0,0,29" VerticalAlignment="Bottom" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Extra Small}" Width="88" HorizontalAlignment="Left" Grid.Column="1"/>
                         <Image Margin="101,22,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30" Grid.ColumnSpan="2">
@@ -212,7 +238,13 @@
 							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
 						    </Image.OpacityMask>
 					    </Image>
-					    <Button x:Name="CompleteCheck_Copy2" Content="虚拟热电隅" Margin="0,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Large}" Height="64" Grid.Column="4" HorizontalAlignment="Left" Width="80"/>
+					    <Button x:Name="CompleteCheck_Copy2" Content="虚拟热电隅" 
+                                Margin="0,15,0,31" Background="{x:Null}" 
+                                BorderBrush="{x:Null}" Foreground="White" 
+                                Style="{DynamicResource TabButton Large}" 
+                                Height="64" Grid.Column="4" 
+                                HorizontalAlignment="Left" Width="80"
+                                Click="VirtualHeat_Click_1"/>
                         <Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="26,21,0,0" Grid.Column="4" HorizontalAlignment="Left" Width="30">
 						    <Image.OpacityMask>
 							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
@@ -474,29 +506,61 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="300"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="WorkSpaceLeft" Grid.Column="0"></Grid>
+            <Grid x:Name="WorkSpaceLeft" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="140"></RowDefinition>
+                </Grid.RowDefinitions>
+                <WindowsFormsHost Grid.Row="0" Name="winform" Padding="5" Margin="10,0,10,10">
+                </WindowsFormsHost>
+                <GridSplitter Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"></GridSplitter>
+                <Grid Name="WorkSpaceNoticeGrid" Grid.Row="1" Grid.Column="0">
+                    <DataGrid x:Name ="gridNoticeData" AutoGenerateColumns="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="序号" Width="175"></DataGridTextColumn>
+                            <DataGridTextColumn Header="运行信息" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
 			<Grid Width="280" Background="{DynamicResource 61\,61\,61}" Grid.Column="1">
 				<Grid x:Name="随便起个名字" Background="{DynamicResource 99\,99\,99}" Height="20" VerticalAlignment="Top" Margin="0" Width="280">
 					<TextBlock Margin="0" TextWrapping="Wrap" d:LayoutOverrides="Height" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"><Run Language="zh-cn" Text="随便起个名字"/></TextBlock>
 				</Grid>
 				<Grid x:Name="菜单名" HorizontalAlignment="Left" Height="45.837" Margin="10,31,0,0" VerticalAlignment="Top" Width="55">
-					<TextBlock TextWrapping="Wrap" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0"><Run Language="zh-cn" Text="菜单一"/></TextBlock>
-					<TextBlock TextWrapping="Wrap" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0"><Run Language="zh-cn" Text="菜单二"/></TextBlock>
+					<TextBlock TextWrapping="Wrap" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0"><Run Language="zh-cn" Text="旋转角度"/></TextBlock>
+					<TextBlock TextWrapping="Wrap" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0"><Run Language="zh-cn" Text="显示模式"/></TextBlock>
 				</Grid>
-				<ComboBox Margin="75,29,10,0" VerticalAlignment="Top" Background="{DynamicResource 61\,61\,61}" BorderBrush="{DynamicResource 99\,99\,99}" Foreground="White" Height="20" Style="{DynamicResource ComboBoxStyle Revised}">
-					<ComboBoxItem Content="ComboBoxItem" Background="{DynamicResource 61\,61\,61}"/>
-					<ComboBoxItem Content="ComboBoxItem"/>
+				<ComboBox 
+                    x:Name="AngleBox" Margin="75,29,10,0"  
+                    VerticalAlignment="Top" Background="{DynamicResource 61\,61\,61}" 
+                    BorderBrush="{DynamicResource 99\,99\,99}" Foreground="White" 
+                    Height="20" Style="{DynamicResource ComboBoxStyle Revised}"
+                    SelectedIndex="0">
+					<ComboBoxItem Content="0" Background="{DynamicResource 61\,61\,61}"/>
+                    <ComboBoxItem Content="90" Background="{DynamicResource 61\,61\,61}"/>
+                    <ComboBoxItem Content="180" Background="{DynamicResource 61\,61\,61}"/>
+                    <ComboBoxItem Content="270" Background="{DynamicResource 61\,61\,61}"/>
+                    <ComboBoxItem Content="360" Background="{DynamicResource 61\,61\,61}"/>
 				</ComboBox>
-				<ComboBox Margin="75,59,10,0" VerticalAlignment="Top" Background="{DynamicResource 61\,61\,61}" BorderBrush="{DynamicResource 99\,99\,99}" Foreground="White" Height="20" Style="{DynamicResource ComboBoxStyle Revised}">
-					<ComboBoxItem Content="ComboBoxItem" Background="{DynamicResource 61\,61\,61}"/>
-					<ComboBoxItem Content="ComboBoxItem"/>
-				</ComboBox>
+				<ComboBox 
+                    x:Name="SchemeBox" Margin="75,59,10,0" 
+                    VerticalAlignment="Top" Background="{DynamicResource 61\,61\,61}" 
+                    BorderBrush="{DynamicResource 99\,99\,99}" Foreground="White" 
+                    Height="20" Style="{DynamicResource ComboBoxStyle Revised}"
+                    SelectedIndex="0">
+                    <ComboBoxItem Content="填充" Background="{DynamicResource 61\,61\,61}"/>
+                    <ComboBoxItem Content="轮廓" Background="{DynamicResource 61\,61\,61}"/>
+                </ComboBox>
 				<TreeView Margin="10,89,10,40" BorderBrush="{x:Null}" Background="{DynamicResource 75\,75\,75}">
 					<TreeViewItem Header="TreeViewItem" Foreground="White">
 						<TreeViewItem Header="TreeViewItem" Foreground="White"/>
 					</TreeViewItem>
 				</TreeView>
-				<Button Content="重新生成模型" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="100" Background="{DynamicResource 75\,75\,75}" Foreground="White" Height="21" Style="{DynamicResource Button Simple}"/>
+				<Button Content="重新生成模型" HorizontalAlignment="Right" Margin="0,0,10,10" 
+                        VerticalAlignment="Bottom" Width="100" Background="{DynamicResource 75\,75\,75}" 
+                        Foreground="White" Height="21" Style="{DynamicResource Button Simple}"
+                        Click="ComfirmSettingButton_Click_1"/>
 				<Button Content="重置" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="50" Background="{DynamicResource 75\,75\,75}" Foreground="White" Height="21" Style="{DynamicResource Button Simple}"/>
 			</Grid>
 		</Grid>

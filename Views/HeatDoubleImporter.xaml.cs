@@ -43,7 +43,7 @@ namespace WpfRibbonApplication1
                 string filename = opfile.FileName;
                 DataTable dbtable = CSVReader.ReadCSVFile(filename, true);
                 DataRow[] dbrow = dbtable.Select();
-                BindingList<Models.HeatDoubler> hdlist = new BindingList<Models.HeatDoubler>();
+                List<Models.HeatDoubler> hdlist = new List<Models.HeatDoubler>();
                 foreach (DataRow dr in dbrow)
                 {
                     Models.HeatDoubler hdrow = new Models.HeatDoubler(dr[0].ToString(), System.Convert.ToDouble(dr[1]),
@@ -54,6 +54,8 @@ namespace WpfRibbonApplication1
                 //ShowImportedData.ItemsSource = dbtable.AsDataView();
                
                 ShowImportedData.ItemsSource = hdlist;
+                MainWindow.WorkSpaceInstance.HeatDoublerInstances = hdlist;
+
             }
         }
     }
