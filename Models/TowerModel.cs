@@ -433,7 +433,7 @@ namespace WpfRibbonApplication1
                 points.InsertPoint(cnt,
                     NodeList[i].Node_Coord[0],
                     0,
-                    NodeList[i].Node_Coord[1]);
+                    -NodeList[i].Node_Coord[1]);
                 cnt++;
                 
             }

@@ -183,7 +183,9 @@ namespace WpfRibbonApplication1
             renWin.SetSize((int)paras.Height, (int)paras.Width);
             renWin.Render();
             vtkCamera camera = ren1.GetActiveCamera();
-            camera.Zoom(1.5);
+            camera.SetPosition(0, -50, 0);
+            
+            //camera.Zoom(1.5);
         }
     }
 }

@@ -61,5 +61,11 @@ namespace WpfRibbonApplication1
                 MainWindow.paras.UsingVirtualHeater = 1;
             }
         }
+
+        private void BtnClearer_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainWindow.WorkSpaceInstance.HeatDoublerInstances = new Models.HeatDoublers();
+            ShowImportedData.ItemsSource = MainWindow.WorkSpaceInstance.HeatDoublerInstances.list;
+        }
     }
 }
