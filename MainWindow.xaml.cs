@@ -14,8 +14,6 @@ using System.Windows.Shapes;
 
 
 //using System.Windows.Forms;
-
-using Microsoft.Windows.Controls.Ribbon;
 using Microsoft.Win32;
 using System.IO;
 using NDatabase;

@@ -119,65 +119,41 @@
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Unselected">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
     											</DoubleAnimationUsingKeyFrames>
-    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Focused">
-    												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-    											</DoubleAnimationUsingKeyFrames>
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Selected">
-    												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+    												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
     											</DoubleAnimationUsingKeyFrames>
     										</Storyboard>
     									</VisualState>
     									<VisualState x:Name="Disabled">
     										<Storyboard>
-    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Selected">
-    												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-    											</DoubleAnimationUsingKeyFrames>
-    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Content_Unselected">
+    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Content">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
     											</DoubleAnimationUsingKeyFrames>
     										</Storyboard>
     									</VisualState>
     								</VisualStateGroup>
     								<VisualStateGroup x:Name="SelectionStates">
-    									<VisualState x:Name="Unselected">
-    										<Storyboard>
-    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Selected">
-    												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-    											</DoubleAnimationUsingKeyFrames>
-    										</Storyboard>
-    									</VisualState>
+    									<VisualState x:Name="Unselected"/>
     									<VisualState x:Name="Selected">
     										<Storyboard>
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Unselected">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
     											</DoubleAnimationUsingKeyFrames>
-    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Focused">
+    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Content">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
     											</DoubleAnimationUsingKeyFrames>
-    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Content_Focused">
-    												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-    											</DoubleAnimationUsingKeyFrames>
-    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Content_Selected">
-    												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Selected">
+    												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
     											</DoubleAnimationUsingKeyFrames>
     										</Storyboard>
     									</VisualState>
     								</VisualStateGroup>
     								<VisualStateGroup x:Name="FocusStates">
-    									<VisualState x:Name="Unfocused">
-    										<Storyboard>
-    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Selected">
-    												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-    											</DoubleAnimationUsingKeyFrames>
-    										</Storyboard>
-    									</VisualState>
+    									<VisualState x:Name="Unfocused"/>
     									<VisualState x:Name="Focused">
     										<Storyboard>
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Unselected">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-    											</DoubleAnimationUsingKeyFrames>
-    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Focused">
-    												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
     											</DoubleAnimationUsingKeyFrames>
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Bd_Selected">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
@@ -191,33 +167,18 @@
     									<VisualState x:Name="InvalidUnfocused"/>
     								</VisualStateGroup>
     							</VisualStateManager.VisualStateGroups>
-    							<Border x:Name="Bd_Selected" BorderThickness="1,1,1,0" Padding="{TemplateBinding Padding}" Background="{DynamicResource 61\,61\,61}">
-    								<ContentPresenter x:Name="Content_Selected" ContentSource="Header" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" RenderTransformOrigin="0.5,0.5" Margin="0,-0.5,0,0.5">
-    									<ContentPresenter.RenderTransform>
-    										<TransformGroup>
-    											<ScaleTransform/>
-    											<SkewTransform/>
-    											<RotateTransform/>
-    											<TranslateTransform/>
-    										</TransformGroup>
-    									</ContentPresenter.RenderTransform>
-    								</ContentPresenter>
-    							</Border>
-    							<Border x:Name="Bd_Unselected" BorderThickness="1,1,1,0" Padding="{TemplateBinding Padding}" Background="{DynamicResource 99\,99\,99}">
-    								<ContentPresenter x:Name="Content_Unselected" ContentSource="Header" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" Margin="0,-0.5,0,0.5"/>
-    							</Border>
-    							<Border x:Name="Bd_Focused" BorderThickness="1,1,1,0" Padding="{TemplateBinding Padding}" Background="{DynamicResource 61\,61\,61}" Opacity="0">
-    								<ContentPresenter x:Name="Content_Focused" ContentSource="Header" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" RenderTransformOrigin="0.5,0.5" Margin="0,-0.5,0,0.5">
-    									<ContentPresenter.RenderTransform>
-    										<TransformGroup>
-    											<ScaleTransform/>
-    											<SkewTransform/>
-    											<RotateTransform/>
-    											<TranslateTransform/>
-    										</TransformGroup>
-    									</ContentPresenter.RenderTransform>
-    								</ContentPresenter>
-    							</Border>
+    							<Border x:Name="Bd_Selected" BorderThickness="1,1,1,0" Padding="{TemplateBinding Padding}" Background="{DynamicResource 61\,61\,61}" Opacity="0"/>
+    							<Border x:Name="Bd_Unselected" BorderThickness="1,1,1,0" Padding="{TemplateBinding Padding}" Background="{DynamicResource 99\,99\,99}"/>
+    							<ContentPresenter x:Name="Content" ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RenderTransformOrigin="0.5,0.5" Margin="0,3.081,0,1.081" VerticalAlignment="Stretch" HorizontalAlignment="Center" d:LayoutOverrides="Height">
+    								<ContentPresenter.RenderTransform>
+    									<TransformGroup>
+    										<ScaleTransform/>
+    										<SkewTransform/>
+    										<RotateTransform/>
+    										<TranslateTransform/>
+    									</TransformGroup>
+    								</ContentPresenter.RenderTransform>
+    							</ContentPresenter>
     						</Grid>
     						<ControlTemplate.Triggers>
     							<Trigger Property="IsMouseOver" Value="true">
@@ -249,7 +210,6 @@
     									<Condition Property="TabStripPlacement" Value="Top"/>
     								</MultiTrigger.Conditions>
     								<Setter Property="Margin" Value="-2,-2,-2,-1"/>
-    								<Setter Property="Margin" TargetName="Content_Unselected" Value="0,0,0,1"/>
     							</MultiTrigger>
     							<MultiTrigger>
     								<MultiTrigger.Conditions>
@@ -257,7 +217,6 @@
     									<Condition Property="TabStripPlacement" Value="Bottom"/>
     								</MultiTrigger.Conditions>
     								<Setter Property="Margin" Value="-2,-1,-2,-2"/>
-    								<Setter Property="Margin" TargetName="Content_Unselected" Value="0,1,0,0"/>
     							</MultiTrigger>
     							<MultiTrigger>
     								<MultiTrigger.Conditions>
@@ -265,7 +224,6 @@
     									<Condition Property="TabStripPlacement" Value="Left"/>
     								</MultiTrigger.Conditions>
     								<Setter Property="Margin" Value="-2,-2,-1,-2"/>
-    								<Setter Property="Margin" TargetName="Content_Unselected" Value="0,0,1,0"/>
     							</MultiTrigger>
     							<MultiTrigger>
     								<MultiTrigger.Conditions>
@@ -273,7 +231,6 @@
     									<Condition Property="TabStripPlacement" Value="Right"/>
     								</MultiTrigger.Conditions>
     								<Setter Property="Margin" Value="-1,-2,-2,-2"/>
-    								<Setter Property="Margin" TargetName="Content_Unselected" Value="1,0,0,0"/>
     							</MultiTrigger>
     							<Trigger Property="IsEnabled" Value="false">
     								<Setter Property="Background" TargetName="Bd_Unselected" Value="{StaticResource TabItemDisabledBackground}"/>
@@ -308,7 +265,7 @@
     			<Setter Property="Template">
     				<Setter.Value>
     					<ControlTemplate TargetType="{x:Type Button}">
-    						<Grid Background="{DynamicResource 61\,61\,61}">
+    						<Grid Background="{DynamicResource 61\,61\,61}" Width="Auto">
     							<VisualStateManager.VisualStateGroups>
     								<VisualStateGroup x:Name="CommonStates">
     									<VisualState x:Name="Normal"/>
@@ -317,6 +274,9 @@
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Backgroud_Unfocused">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
     											</DoubleAnimationUsingKeyFrames>
+    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Focused">
+    												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+    											</DoubleAnimationUsingKeyFrames>
     										</Storyboard>
     									</VisualState>
     									<VisualState x:Name="Pressed">
@@ -324,11 +284,17 @@
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Backgroud_Unfocused">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
     											</DoubleAnimationUsingKeyFrames>
+    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Focused">
+    												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+    											</DoubleAnimationUsingKeyFrames>
     										</Storyboard>
     									</VisualState>
     									<VisualState x:Name="Disabled">
     										<Storyboard>
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter">
+    												<EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
+    											</DoubleAnimationUsingKeyFrames>
+    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
     											</DoubleAnimationUsingKeyFrames>
     										</Storyboard>
@@ -341,16 +307,17 @@
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Backgroud_Unfocused">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
     											</DoubleAnimationUsingKeyFrames>
+    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Focused">
+    												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+    											</DoubleAnimationUsingKeyFrames>
     										</Storyboard>
     									</VisualState>
     								</VisualStateGroup>
     							</VisualStateManager.VisualStateGroups>
-    							<Grid x:Name="Background_Focused" Background="{DynamicResource 99\,99\,99}" Width="58" Height="62" Margin="0,1" d:LayoutOverrides="HorizontalMargin">
-    								<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Bottom" Margin="0,0,0,3.6"/>
-    							</Grid>
-    							<Grid x:Name="Backgroud_Unfocused" Background="{DynamicResource 61\,61\,61}" Width="60" Height="64">
-    								<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Bottom" Margin="0,0,0,4.581"/>
-    							</Grid>
+    							<Grid x:Name="Background_Focused" Background="{DynamicResource 99\,99\,99}" Width="Auto" Height="64" Margin="0" Opacity="0"/>
+    							<Grid x:Name="Backgroud_Unfocused" Background="{DynamicResource 61\,61\,61}" Width="Auto" Height="64"/>
+    							<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Top" Margin="0,8,0,0"/>
+    							<TextBlock x:Name="textBlock" Height="Auto" TextWrapping="Wrap" Text="{TemplateBinding Tag}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,5"/>
     						</Grid>
     						<ControlTemplate.Triggers>
     							<Trigger Property="IsKeyboardFocused" Value="true"/>
@@ -384,12 +351,18 @@
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Unfocused">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
     											</DoubleAnimationUsingKeyFrames>
+    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Focused">
+    												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+    											</DoubleAnimationUsingKeyFrames>
     										</Storyboard>
     									</VisualState>
     									<VisualState x:Name="Pressed">
     										<Storyboard>
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Unfocused">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+    											</DoubleAnimationUsingKeyFrames>
+    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Focused">
+    												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
     											</DoubleAnimationUsingKeyFrames>
     										</Storyboard>
     									</VisualState>
@@ -408,16 +381,17 @@
     											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Unfocused">
     												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
     											</DoubleAnimationUsingKeyFrames>
+    											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Focused">
+    												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+    											</DoubleAnimationUsingKeyFrames>
     										</Storyboard>
     									</VisualState>
     								</VisualStateGroup>
     							</VisualStateManager.VisualStateGroups>
-    							<Grid x:Name="Background_Focused" Width="98" Height="28" Background="{DynamicResource 99\,99\,99}" Margin="0,1" d:LayoutOverrides="HorizontalMargin">
-    								<ContentPresenter HorizontalAlignment="Stretch" Margin="31.7,1,7.705,1" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" d:LayoutOverrides="Width"/>
-    							</Grid>
-    							<Grid x:Name="Background_Unfocused" Background="{DynamicResource 61\,61\,61}">
-    								<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Stretch" Margin="32.7,1,7.705,1" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" d:LayoutOverrides="Width"/>
-    							</Grid>
+    							<Grid x:Name="Background_Focused" Width="Auto" Height="Auto" Background="{DynamicResource 99\,99\,99}" Margin="0" d:LayoutOverrides="HorizontalMargin" Opacity="0"/>
+    							<Grid x:Name="Background_Unfocused" Background="{DynamicResource 61\,61\,61}"/>
+    							<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Left" Margin="8,1,0,1" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="20" Height="20"/>
+    							<TextBlock Margin="0,0,8,0" TextWrapping="Wrap" Text="{TemplateBinding Tag}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
     						</Grid>
     						<ControlTemplate.Triggers>
     							<Trigger Property="IsKeyboardFocused" Value="true"/>
@@ -521,7 +495,7 @@
     			<Setter Property="Template">
     				<Setter.Value>
     					<ControlTemplate TargetType="{x:Type Button}">
-    						<Grid Background="{DynamicResource 61\,61\,61}">
+    						<Grid Background="{DynamicResource 61\,61\,61}" Width="80">
     							<VisualStateManager.VisualStateGroups>
     								<VisualStateGroup x:Name="CommonStates">
     									<VisualState x:Name="Normal"/>
