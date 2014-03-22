@@ -8,522 +8,645 @@
 	x:Class="WpfRibbonApplication1.MainWindow"
 	x:Name="Window"
 	d:DesignWidth="640" d:DesignHeight="480" Width="1220" Background="#FF4B4B4B">
+	<Window.Resources>
+        
+		<Style x:Key="xxxbutton" TargetType="{x:Type Button}">
+			<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+			<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="1"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid Background="{DynamicResource 61\,61\,61}">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver">
+										<Storyboard>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Backgroud_Unfocused">
+												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+											</DoubleAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Focused">
+												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+											</DoubleAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Backgroud_Unfocused">
+												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+											</DoubleAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Focused">
+												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+											</DoubleAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled">
+										<Storyboard>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter">
+												<EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
+											</DoubleAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="FocusStates">
+									<VisualState x:Name="Unfocused"/>
+									<VisualState x:Name="Focused">
+										<Storyboard>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Backgroud_Unfocused">
+												<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+											</DoubleAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Focused">
+												<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+											</DoubleAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Grid x:Name="Background_Focused" Background="{DynamicResource 99\,99\,99}" Width="Auto" Height="62" Margin="0,1" d:LayoutOverrides="HorizontalMargin" Opacity="0">
+								<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Bottom" Margin="0,0,0,3.6" Content="新建工程"/>
+							</Grid>
+							<Grid x:Name="Backgroud_Unfocused" Background="{DynamicResource ButtonNormalBackground}" Width="Auto" Height="64">
+								<ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Bottom" Margin="0,0,0,4.581"/>
+							</Grid>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsKeyboardFocused" Value="true"/>
+							<Trigger Property="ToggleButton.IsChecked" Value="true"/>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Foreground" Value="#ADADAD"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Window.Resources>
 
 	<Grid x:Name="LayoutRoot" >
         <Grid.RowDefinitions>
             <RowDefinition Height="135"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Name="TabContent" Grid.Row="0">
-            <TabControl x:Name="ToolTab" BorderBrush="{x:Null}" Height="132" BorderThickness="0">
-			    <TabItem x:Name="WorkSpaceTab" Header="工作区" Background="{DynamicResource 99\,99\,99}" Foreground="White" Width="80" BorderBrush="{x:Null}" >
-				    <Grid x:Name="WorkSpaceButton" Background="{DynamicResource 61\,61\,61}" Margin="0">
-					    <Grid.ColumnDefinitions>
-						    <ColumnDefinition Width="0.107*"/>
-						    <ColumnDefinition Width="0.12*"/>
-						    <ColumnDefinition Width="0.104*"/>
-						    <ColumnDefinition Width="0.085*"/>
-						    <ColumnDefinition Width="0.17*"/>
-						    <ColumnDefinition Width="0.414*"/>
-					    </Grid.ColumnDefinitions>
-                        <Button 
-                            x:Name="BuildNewProj" Content="新建工程" 
-                            Margin="8.223,14.934,63.387,31.066" Background="{x:Null}" 
-                            BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" 
-                            Height="64" Width="60" Grid.Column="0"
-                            Click="BuildNewProj_Click">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <StackPanel VerticalAlignment="Center">
-                                        <Image Source="Images/BuildNewProj.png" Width="30" Height="30"/>
-                                        <TextBlock Text="文字" Width="30"/>
-                                    </StackPanel>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                            <Button x:Name="OpenProj" Content="打开工程" 
-                                Margin="68.223,14.934,3.387,31.066" 
-                                Background="{x:Null}" BorderBrush="{x:Null}" 
-                                Foreground="White" Style="{DynamicResource TabButton}" 
-                                Height="64" Width="60" Grid.Column="0"
-                                Click="OpenProjButton_Click"/>
-					    <Button x:Name="GridModel" Content="网络模型" HorizontalAlignment="Left" Margin="0.344,14.934,0,31.066" Width="60" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Grid.Column="1"/>
-					    <Button x:Name="SolidTranformModel" Content="固化变形模型" Margin="63.407,14.934,4.193,31.066" Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Large}" Height="64" Width="80"/>
-					    <Button x:Name="CopyAction" Content="复制" HorizontalAlignment="Left" Margin="0.87,14.756,0,31.243" Width="40" Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Medium}" Height="64" d:LayoutOverrides="VerticalMargin"/>
-					    <Button x:Name="DeleteAction" Content="删除" Margin="40.87,14.756,41.85,31.243" Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Medium}" Height="64" d:LayoutOverrides="VerticalMargin"/>
-					    <Button x:Name="ReviseAction" Content="修改" Margin="0,14.756,1.342,31.243" Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Medium}" Height="64" d:LayoutOverrides="VerticalMargin" HorizontalAlignment="Right" Width="40"/>
-					    <Button x:Name="BuildCoord" Content="创建坐标系" Margin="2.23,17.63,2.32,0" VerticalAlignment="Top" Grid.Column="3" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Width="100"/>
-					    <Button x:Name="LookupCoord" Content="查看坐标系" Margin="2.171,0,2.379,28.762" Grid.Column="3" VerticalAlignment="Bottom" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Width="100"/>
-					    <Button x:Name="UnitSys" Content="单位体系" Margin="1.647,14.934,0,31.066" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" HorizontalAlignment="Left" Width="60"/>
-					    <Button x:Name="StatisticInfo" Content="统计信息" Margin="65.985,14.934,83.115,31.066" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
-					    <Button x:Name="CompleteCheck" Content="完整性检查" Margin="0,14.756,1.082,31.243" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Large}" Height="64" d:LayoutOverrides="VerticalMargin" HorizontalAlignment="Right" Width="80"/>
-					    <TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="工作区"/></TextBlock>
-					    <TextBlock Margin="0,0,0,9.995" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="模型"/></TextBlock>
-					    <TextBlock Margin="0,0,0,9.99" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="编辑"/></TextBlock>
-					    <TextBlock Margin="0,0,0,9.986" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="3" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="坐标系统"/></TextBlock>
-					    <TextBlock Margin="0,0,0,9.983" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="4" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="高级功能"/></TextBlock>
-					    <!--
-                        <Image Height="30" VerticalAlignment="Top" Width="30" HorizontalAlignment="Left" Source="Images/BuildNewProj.png" Margin="23.5,21,0,0" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png" Stretch="None"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        -->
-                        <Image Margin="0,21.75,15.648,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Right" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="15.852,21,0,0" Height="30" VerticalAlignment="Top" Width="30" HorizontalAlignment="Left" d:LayoutOverrides="VerticalAlignment" Source="Images/GridModel.png" Grid.Column="1">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="0,21,27.122,0" Height="30" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" Source="Images/SolidTranformModel.png" Grid.Column="1" HorizontalAlignment="Right" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="5.378,21.75,0,0" Height="30" VerticalAlignment="Top" Width="30" HorizontalAlignment="Left" d:LayoutOverrides="VerticalAlignment" Source="Images/CopyAction.png" Grid.Column="2">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="46.378,21,46.181,0" Height="30" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" Source="Images/DeleteAction.png" Grid.Column="2">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="0,21.75,6.601,0" Height="30" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" Source="Images/ReviseAction.png" Grid.Column="2" HorizontalAlignment="Right" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="16.692,21,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment" Source="Images/UnitSys.png" Grid.Column="4">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="76.192,21,94.232,0" Height="30" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" Source="Images/StatisticInfo.png" Grid.Column="4">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Height="30" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" Source="Images/CompleteCheck.png" Margin="0,21,25.732,0" Grid.Column="4" HorizontalAlignment="Right" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="7.899,22.75,0,0" Height="20" VerticalAlignment="Top" Source="Images/BuildCoord.png" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Left" Width="20" Grid.Column="3">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/SmallIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="8.899,55.25,0,0" Height="20" VerticalAlignment="Top" Source="Images/LookupCoord.png" HorizontalAlignment="Left" Width="20" Grid.Column="3">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Left" Stretch="Fill" Width="33.13" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Right" Stretch="Fill" Width="33.13" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Left" Stretch="Fill" Width="46.8" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="1"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Right" Stretch="Fill" Width="46.8" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="1"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="2" HorizontalAlignment="Left" Width="37.36"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Right" Stretch="Fill" Width="37.36" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="2"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="7.899,0,0,15.5" Grid.Column="3" HorizontalAlignment="Left" Width="14.251"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="3" HorizontalAlignment="Right" Width="14.15"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="4" HorizontalAlignment="Left" Width="64.3"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="4" HorizontalAlignment="Right" Width="64.3"/>
-				    </Grid>
-			    </TabItem>
-			    <TabItem x:Name="NumericSimulationTab" Header="数值模拟" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}" Margin="0" Height="20" HorizontalContentAlignment="Stretch">
-				    <Grid x:Name="NumericSimulationButton" Background="{DynamicResource 61\,61\,61}" Margin="0">
-					    <Grid.ColumnDefinitions>
-						    <ColumnDefinition Width="117*"/>
-                            <ColumnDefinition Width="218*"/>
-                            <ColumnDefinition Width="218*"/>
-						    <ColumnDefinition Width="181*"/>
-						    <ColumnDefinition Width="181*"/>
-						    <ColumnDefinition Width="290*"/>
-						    <ColumnDefinition Width="0*"/>
-					    </Grid.ColumnDefinitions>
-					    <Button x:Name="导入模型" Content="导入模型" 
-                                Margin="86,15,189,31" Background="{x:Null}" 
-                                BorderBrush="{x:Null}" Foreground="White" 
-                                Style="{DynamicResource TabButton}" Height="64" Width="60" 
-                                Grid.ColumnSpan="2"
-                                Click="ImportModel_Click"/>
-					    <Button x:Name="BuildCoord_Copy" Content="主体材料" Margin="31,18,99,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Extra Small}" Width="88" Grid.Column="1"/>
-					    <Button x:Name="LookupCoord_Copy" Content="焊缝材料" Margin="32,0,0,29" VerticalAlignment="Bottom" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Extra Small}" Width="88" HorizontalAlignment="Left" Grid.Column="1"/>
-                        <Image Margin="101,22,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30" Grid.ColumnSpan="2">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="39,23,159,0" Height="20" VerticalAlignment="Top" Source="Images/BuildCoord.png" Width="20" Grid.Column="1">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/SmallIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="40,55,158,0" Height="20" VerticalAlignment="Top" Source="Images/LookupCoord.png" Width="20" Grid.Column="1">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="BuildCoord_Copy1" Content="焦炭材料" Margin="0,18,1,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Width="100" HorizontalAlignment="Right" Grid.Column="1"/>
-					    <Button x:Name="LookupCoord_Copy1" Content="保温层材料" Margin="0,0,0,29" VerticalAlignment="Bottom" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Width="100" HorizontalAlignment="Right" Grid.Column="1"/>
-                        <Image Margin="0,23,73,0" Height="20" VerticalAlignment="Top" Source="Images/BuildCoord.png" HorizontalAlignment="Right" Width="20" Grid.Column="1">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/SmallIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="0,55,72,0" Height="20" VerticalAlignment="Top" Source="Images/LookupCoord.png" HorizontalAlignment="Right" Width="20" Grid.Column="1">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="BuildCoord_Copy2" Content="油气预热" Margin="1,18,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Extra Small}" Width="88" HorizontalAlignment="Left" Grid.Column="2"/>
-					    <Button x:Name="LookupCoord_Copy2" Content="进油结焦" Margin="2,0,0,29" VerticalAlignment="Bottom" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Extra Small}" Width="88" HorizontalAlignment="Left" Grid.Column="2"/>
-                        <Image Margin="8,23,0,0" Height="20" VerticalAlignment="Top" Source="Images/BuildCoord.png" HorizontalAlignment="Left" Width="20" Grid.Column="2">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/SmallIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="9,55,0,0" Height="20" VerticalAlignment="Top" Source="Images/LookupCoord.png" HorizontalAlignment="Left" Width="20" Grid.Column="2">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="BuildCoord_Copy3" Content="大小吹气" Margin="91,18,39,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Extra Small}" Grid.Column="2" Width="88"/>
-					    <Button x:Name="LookupCoord_Copy3" Content="给水冷焦" Margin="92,0,38,29" VerticalAlignment="Bottom" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Extra Small}" Grid.Column="2" Width="88"/>
-                        <Image Margin="99,23,99,0" Height="20" VerticalAlignment="Top" Source="Images/BuildCoord.png" Grid.Column="2" Width="20">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/SmallIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-                        <Image Margin="100,55,98,0" Height="20" VerticalAlignment="Top" Source="Images/LookupCoord.png" Grid.Column="2" Width="20">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy" Content="工况" Margin="181,15,178,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Medium}" Height="64" Width="40" Grid.Column="2" Grid.ColumnSpan="2"/>
-                        <Image Margin="0,22,5,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" Grid.Column="2">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <TextBlock Margin="39,0,155,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" HorizontalAlignment="Center" Grid.Column="1"><Run Language="zh-cn" Text="建模"/></TextBlock>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Left" Stretch="Fill" Width="145.58" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.ColumnSpan="2"/>
-					    <Button x:Name="导入模型_Copy1" Content="运行设置" Margin="82,15,39,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="3"/>
-                        <Image Margin="0,22,56,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Grid.Column="3" HorizontalAlignment="Right" Width="29">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy2" Content="运行" Margin="142,15,180,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Medium}" Height="64" Width="40" Grid.Column="3" Grid.ColumnSpan="2"/>
-                        <Image Margin="0,22,6,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Grid.Column="3" HorizontalAlignment="Right" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="CompleteCheck_Copy" Content="工艺参数检查" Margin="1,15,0,31" Grid.Column="3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Large}" Height="64" HorizontalAlignment="Left" Width="80"/>
-                        <Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="27,21,0,0" Grid.Column="3" HorizontalAlignment="Left" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="CompleteCheck_Copy1" Content="模型库引入" Margin="6,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Large}" Height="64" HorizontalAlignment="Left" Width="80" Grid.Column="0"/>
-                        <Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="32,21,0,0" HorizontalAlignment="Left" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="CompleteCheck_Copy2" Content="虚拟热电隅" 
-                                Margin="0,15,0,31" Background="{x:Null}" 
-                                BorderBrush="{x:Null}" Foreground="White" 
-                                Style="{DynamicResource TabButton Large}" 
-                                Height="64" Grid.Column="4" 
-                                HorizontalAlignment="Left" Width="80"
-                                Click="VirtualHeat_Click_1"/>
-                        <Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="26,21,0,0" Grid.Column="4" HorizontalAlignment="Left" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="CompleteCheck_Copy3" Content="虚拟应力/应变片" Margin="82,15,289,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Extra Large}" Height="64" Grid.Column="4" Width="100" Grid.ColumnSpan="2"/>
-                        <Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="0,21,36,0" Grid.Column="4" HorizontalAlignment="Right" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy3" Content="表格" Margin="1,15,249,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Medium}" Height="64" Width="40" Grid.Column="5"/>
-                        <Image Margin="5,22,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Grid.Column="5" HorizontalAlignment="Left" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy4" Content="云图" Margin="41,15,209,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Medium}" Height="64" Width="40" Grid.Column="5"/>
-                        <Image Margin="45,22,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Grid.Column="5" HorizontalAlignment="Left" Width="29">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy5" Content="温度历程" Margin="82,15,148,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="5"/>
-                        <Image Margin="96,22,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Grid.Column="5" HorizontalAlignment="Left" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy6" Content="变形图" Margin="143,15,87,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="5"/>
-                        <Image Margin="0,22,107,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Grid.Column="5" HorizontalAlignment="Right" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy7" Content="动画" Margin="204,15,46,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Medium}" Height="64" Width="40" Grid.Column="5"/>
-                        <Image Margin="0,22,56,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Grid.Column="5" HorizontalAlignment="Right" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy8" Content="报告" Margin="246,15,4,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Medium}" Height="64" Width="40" Grid.Column="5"/>
-                        <Image Margin="0,22,15,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Grid.Column="5" HorizontalAlignment="Right" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Right" Stretch="Fill" Width="145.58" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="1"/>
-					    <TextBlock Margin="97,0,97,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="2" HorizontalAlignment="Center"><Run Language="zh-cn" Text="工况"/></TextBlock>
-					    <TextBlock Margin="61,0,60,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="3" HorizontalAlignment="Center"><Run Language="zh-cn" Text="温度场分析"/></TextBlock>
-					    <TextBlock Margin="60,0,61,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="4" HorizontalAlignment="Center"><Run Language="zh-cn" Text="虚拟传感器"/></TextBlock>
-					    <TextBlock Margin="133,0,133,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="5" HorizontalAlignment="Center"><Run Language="zh-cn" Text="结果"/></TextBlock>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="2" HorizontalAlignment="Left" Width="86.41"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="2" HorizontalAlignment="Right" Width="86.41"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="3" HorizontalAlignment="Left" Width="49.5"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="3" HorizontalAlignment="Right" Width="49.5"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="4" HorizontalAlignment="Left" Width="49.5"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="4" HorizontalAlignment="Right" Width="49.5"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="5" HorizontalAlignment="Left" Width="123.01"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="5" HorizontalAlignment="Right" Width="123.01"/>
-				    </Grid>
-			    </TabItem>
-			    <TabItem x:Name="HardwarePortTab" Header="硬件接口" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}" Height="20">
-				    <Grid x:Name="HardwarePortButton" Background="{DynamicResource 61\,61\,61}">
-					    <Grid.ColumnDefinitions>
-						    <ColumnDefinition Width="0.12*"/>
-						    <ColumnDefinition Width="0.3*"/>
-						    <ColumnDefinition Width="0.102*"/>
-						    <ColumnDefinition Width="0.202*"/>
-						    <ColumnDefinition Width="0.276*"/>
-					    </Grid.ColumnDefinitions>
-					    <Button x:Name="导入模型_Copy9" Content="热电隅" Margin="85.833,14.934,0.567,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
-                        <Image Margin="0,21.75,16.388,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" d:LayoutOverrides="Width" HorizontalAlignment="Center"><Run Language="zh-cn" Text="传感器布置"/></TextBlock>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" HorizontalAlignment="Left" Width="31.2"/>
-					    <Button x:Name="CompleteCheck_Copy5" Content="应力/应变片" Margin="6.268,14.756,60.732,31.243" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Large}" Height="64" d:LayoutOverrides="VerticalMargin"/>
-                        <Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="31.618,21,0,0" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy10" Content="全站仪" Margin="0.223,14.934,305.777,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="1"/>
-                        <Image Margin="14.612,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment" Grid.Column="1">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy11" Content="状态检查" Margin="61.223,14.934,244.777,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="1"/>
-                        <Image Margin="75.612,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment" Grid.Column="1">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy12" Content="启动监控" Margin="122.223,14.934,183.777,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="1"/>
-                        <Image Margin="136.612,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" d:LayoutOverrides="VerticalAlignment" Grid.Column="1" HorizontalAlignment="Left" Width="30.18">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy13" Content="暂停监控" Margin="183.223,14.934,122.777,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="1"/>
-                        <Image Margin="0,21.75,138.208,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" d:LayoutOverrides="VerticalAlignment" Grid.Column="1">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy14" Content="停止监控" Margin="244.223,14.934,61.777,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="1"/>
-                        <Image Margin="0,21.75,77.208,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" d:LayoutOverrides="VerticalAlignment" Grid.Column="1">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy15" Content="数据比对" Margin="306.223,14.934,-0.223,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="1"/>
-                        <Image Margin="0,21.75,15.208,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" Grid.Column="1" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy16" Content="输出设置" Margin="1.223,14.934,63.217,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="2"/>
-                        <Image Margin="15.412,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Grid.Column="2" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Left" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy17" Content="警告设置" Margin="63.253,14.934,1.187,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="2"/>
-                        <Image Margin="0,21.75,16.648,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Grid.Column="2" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Right" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy18" Content="历史数据" Margin="-0.187,14.934,186.627,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="3"/>
-                        <Image Margin="13.972,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30" Grid.Column="3" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy19" Content="数据处理" Margin="61.813,14.934,124.627,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="3"/>
-                        <Image Margin="76.412,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Grid.Column="3" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Left" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy20" Content="数据分析" Margin="122.813,14.934,63.627,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="3" d:LayoutOverrides="HorizontalAlignment"/>
-                        <Image Margin="0,21.75,79.408,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" Grid.Column="3" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy21" Content="数据查找" Margin="184.813,14.934,1.627,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="3"/>
-                        <Image Margin="0,21.75,17.408,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" Grid.Column="3" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" HorizontalAlignment="Right" Width="31.2"/>
-					    <TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" HorizontalAlignment="Center" Grid.Column="1"><Run Language="zh-cn" Text="实时监控"/></TextBlock>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" HorizontalAlignment="Left" Width="147" Grid.Column="1"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" HorizontalAlignment="Right" Width="147" Grid.Column="1"/>
-					    <TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="2" d:LayoutOverrides="Width" HorizontalAlignment="Center"><Run Language="zh-cn" Text="设置"/></TextBlock>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="2" HorizontalAlignment="Left" Width="38.22"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="2" HorizontalAlignment="Right" Width="38.22"/>
-					    <TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="3" d:LayoutOverrides="Width" HorizontalAlignment="Center"><Run Language="zh-cn" Text="数据分析"/></TextBlock>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="3" HorizontalAlignment="Left" Width="87.22"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="3" HorizontalAlignment="Right" Width="87.22"/>
-				    </Grid>
-			    </TabItem>
-			    <TabItem x:Name="SecurityEvaluationTab" Header="安全评估" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}" Height="20">
-				    <Grid x:Name="SecurityEvaluationButton" Background="{DynamicResource 61\,61\,61}">
-					    <TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" HorizontalAlignment="Center"><Run Language="zh-cn" Text="建模"/></TextBlock>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" HorizontalAlignment="Left" Width="49.2"/>
-					    <Button x:Name="导入模型_Copy23" Content="高温蠕变" Margin="146.623,14.934,1013.377,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
-                        <Image Margin="161.012,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy24" Content="耦合分析" Margin="207.623,14.934,952.377,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
-                        <Image Margin="222.012,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy25" Content="硫腐蚀" Margin="268.623,14.934,891.377,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
-                        <Image Margin="283.012,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30.18" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy32" Content="数据处理" Margin="698.653,14.934,461.347,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
-                        <Image Margin="0,21.75,476.748,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy33" Content="数据分析" Margin="759.653,14.934,400.347,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
-                        <Image Margin="0,21.75,416.128,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="导入模型_Copy34" Content="数据查找" Margin="821.653,14.934,338.347,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
-                        <Image Margin="0,21.75,354.128,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="89.2,0,0,15.5" HorizontalAlignment="Left" Width="49.2"/>
-					    <TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" HorizontalAlignment="Center" Grid.Column="1"><Run Language="zh-cn" Text="建模"/></TextBlock>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="154.4,0,0,15.5" HorizontalAlignment="Left" Width="159"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="345.4,0,0,15.5" HorizontalAlignment="Left" Width="159"/>
-					    <TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="2" HorizontalAlignment="Center"><Run Language="zh-cn" Text="建模"/></TextBlock>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="520.4,0,0,15.5" HorizontalAlignment="Left" Width="38.22"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="590.62,0,591.16,15.5"/>
-					    <TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="3" HorizontalAlignment="Center"><Run Language="zh-cn" Text="建模"/></TextBlock>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,475.94,15.5" HorizontalAlignment="Right" Width="99.22"/>
-					    <Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,344.72,15.5" HorizontalAlignment="Right" Width="99.22"/>
-					    <Button x:Name="BuildNewProj_Copy" Content="低周疲劳" Margin="8.223,14.934,0,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" HorizontalAlignment="Left" d:LayoutOverrides="Width"/>
-                        <Image Height="30" VerticalAlignment="Top" Width="30" HorizontalAlignment="Left" Source="Images/BuildNewProj.png" Margin="23.5,21,0,0" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png" Stretch="None"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="CompleteCheck_Copy4" Content="低弹性损伤" Margin="69.268,14.756,0,31.243" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Large}" Height="64" HorizontalAlignment="Left" Width="80" d:LayoutOverrides="VerticalMargin"/>
-                        <Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="94.618,21,0,0" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="CompleteCheck_Copy6" Content="环烷酸腐蚀" Margin="329.268,14.756,0,31.243" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Large}" Height="64" HorizontalAlignment="Left" Width="80" d:LayoutOverrides="VerticalMargin"/>
-                        <Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="354.618,21,0,0" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-					    <Button x:Name="CompleteCheck_Copy8" Content="塔身热棘轮效应" Margin="410.143,14.756,0,31.243" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Extra Large}" Height="64" Width="100" d:LayoutOverrides="Width, VerticalMargin" HorizontalAlignment="Left"/>
-                        <Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="444.718,21,0,0" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Left" Width="30">
-						    <Image.OpacityMask>
-							    <ImageBrush ImageSource="Images/LargeIcon.png"/>
-						    </Image.OpacityMask>
-					    </Image>
-				    </Grid>
-			    </TabItem>
-			    <TabItem x:Name="DataBaseTab" Header="数据" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}" Margin="0" Height="20">
-				    <Grid Background="{DynamicResource 61\,61\,61}"/>
-			    </TabItem>
-			    <TabItem x:Name="ToolBoxTab" Header="工具箱" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}" Height="20">
-				    <Grid Background="{DynamicResource 61\,61\,61}"/>
-			    </TabItem>
-			    <TabItem x:Name="HelpInfoTab" Header="帮助" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}"  Height="20">
-				    <Grid Background="{DynamicResource 61\,61\,61}"/>
-			    </TabItem>
-		    </TabControl>
-        </Grid>
+        <TabControl x:Name="ToolTab" BorderBrush="{x:Null}" Height="132" BorderThickness="0" Margin="0,1.5">
+			<TabItem x:Name="WorkSpaceTab" Header="工作区" Background="{DynamicResource 99\,99\,99}" Foreground="White" Width="80" BorderBrush="{x:Null}" Margin="-13,0,0,0" HorizontalAlignment="Left" >
+				<Grid x:Name="WorkSpaceButton" Background="{DynamicResource 61\,61\,61}" Margin="5,0,0,0" Width="730" HorizontalAlignment="Left">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="180"/>
+						<ColumnDefinition Width="140"/>
+						<ColumnDefinition Width="120"/>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="190"/>
+					</Grid.ColumnDefinitions>
+					<Button 
+						x:Name="BuildNewProj" 
+						Margin="0,15,0,31" Background="{x:Null}" 
+						BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" 
+						Height="64" Grid.Column="0"
+						Click="BuildNewProj_Click" HorizontalAlignment="Left" Tag="新建工程" Width="60">
+						<Image Height="30" VerticalAlignment="Top" Width="30" Source="Images/BuildNewProj.png" HorizontalAlignment="Center">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png" Stretch="None"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="OpenProj" 
+						Margin="60,15,0,31" 
+						Background="{x:Null}" BorderBrush="{x:Null}" 
+						Foreground="White" Style="{DynamicResource TabButton}" 
+						Height="64" Grid.Column="0"
+						Click="OpenProjButton_Click" Tag="打开工程" HorizontalAlignment="Left" Width="60">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="GridModel" Margin="0,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Tag="网格模型" Grid.Column="1" HorizontalAlignment="Left" Width="60">
+						<Image Height="30" VerticalAlignment="Top" Width="30" Source="Images/GridModel.png">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="SolidTranformModel" Margin="60,15,0,31" Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="80" Tag="固化变形模型" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/SolidTranformModel.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="CopyAction" Margin="0,15,0,31" Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Tag="复制" Width="40" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Width="30" Source="Images/CopyAction.png">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="DeleteAction" Margin="40,15,0,31" Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Tag="删除" Width="40" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/DeleteAction.png" Width="32.657">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="ReviseAction" Margin="80,15,0,31" Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" HorizontalAlignment="Left" Width="40" Tag="修改">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/ReviseAction.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="BuildCoord" Margin="0,17.63,0,0" VerticalAlignment="Top" Grid.Column="3" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Width="100" Tag="创建坐标系" HorizontalAlignment="Left">
+						<Image Height="20" VerticalAlignment="Top" Source="Images/BuildCoord.png" HorizontalAlignment="Left" Width="20">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/SmallIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="LookupCoord" Margin="0,0,0,28.762" Grid.Column="3" VerticalAlignment="Bottom" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Width="100" Tag="查看坐标系" HorizontalAlignment="Left">
+						<Image Height="20" VerticalAlignment="Top" Source="Images/LookupCoord.png">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="UnitSys" Margin="0,15,0,31" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Tag="单位体系" Width="60" HorizontalAlignment="Left" d:LayoutOverrides="Width">
+						<Image Height="30" VerticalAlignment="Top" Width="30" Source="Images/UnitSys.png">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="StatisticInfo" Margin="60,15,0,31" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Tag="统计信息" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/StatisticInfo.png" Width="34.256">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="CompleteCheck" Margin="120,15,0,31" Grid.Column="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" HorizontalAlignment="Left" Width="70" Tag="完整性检查">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Left" Stretch="Fill" Width="60" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Left" Stretch="Fill" Width="46" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="1"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="2" HorizontalAlignment="Left" Width="36"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Right" Stretch="Fill" Width="37.36" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,0.642,15.5" Grid.Column="2"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="3" HorizontalAlignment="Left" Width="14"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="4" HorizontalAlignment="Left" Width="59"/>
+					<TextBlock Margin="0,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15" Background="{DynamicResource 61\,61\,61}"><Run Language="zh-cn" Text="工作区"/></TextBlock>
+					<TextBlock Margin="0,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="模型"/></TextBlock>
+					<TextBlock Margin="0,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="2" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="编辑"/></TextBlock>
+					<TextBlock Margin="0,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="3" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="坐标系统"/></TextBlock>
+					<TextBlock Margin="0,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Column="4" HorizontalAlignment="Center" Foreground="{DynamicResource Text Grey}" Height="15"><Run Language="zh-cn" Text="高级功能"/></TextBlock>
+					<Button x:Name="OpenProj_Copy" 
+						Margin="120,15,0,31" 
+						Background="{x:Null}" BorderBrush="{x:Null}" 
+						Foreground="White" Style="{DynamicResource TabButton}" 
+						Height="64" Grid.Column="0"
+						Click="OpenProjButton_Click" Tag="保存工程" HorizontalAlignment="Left" Width="60">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Left" Stretch="Fill" Width="60" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" HorizontalAlignment="Right" Width="60"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Right" Stretch="Fill" Width="46" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="1"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="2" HorizontalAlignment="Right" Width="36"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="3" HorizontalAlignment="Right" Width="14"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="4" HorizontalAlignment="Right" Width="59"/>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="NumericSimulationTab" Header="数值模拟" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}" Margin="-13,0,0,0" Height="20" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left">
+				<Grid x:Name="NumericSimulationButton" Background="{DynamicResource 61\,61\,61}" Margin="5,0,0,0" Width="1142" HorizontalAlignment="Left">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="306"/>
+						<ColumnDefinition Width="216"/>
+						<ColumnDefinition Width="180"/>
+						<ColumnDefinition Width="170"/>
+						<ColumnDefinition Width="270"/>
+					</Grid.ColumnDefinitions>
+					<Button x:Name="导入模型" 
+						Margin="70,15,0,31" Background="{x:Null}" 
+						BorderBrush="{x:Null}" Foreground="White" 
+						Style="{DynamicResource TabButton}" Height="64" Width="60"
+						Click="ImportModel_Click" Tag="导入模型" HorizontalAlignment="Left" d:LayoutOverrides="GridBox">
+						<Image Height="30" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="BuildCoord_Copy" Margin="130,18,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Tag="主体材料" Width="88" HorizontalAlignment="Left">
+						<Image Source="Images/BuildCoord.png" Width="20" d:LayoutOverrides="HorizontalAlignment">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/SmallIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="LookupCoord_Copy" Margin="130,0,0,29" VerticalAlignment="Bottom" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Tag="焊缝材料" Width="88" HorizontalAlignment="Left">
+						<Image Height="20" VerticalAlignment="Top" Source="Images/LookupCoord.png" Width="20" d:LayoutOverrides="HorizontalAlignment">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="BuildCoord_Copy1" Margin="218,18,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Width="88" HorizontalAlignment="Left" Tag="焦炭材料">
+						<Image Source="Images/BuildCoord.png">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/SmallIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="LookupCoord_Copy1" Margin="218,0,0,29" VerticalAlignment="Bottom" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Width="88" HorizontalAlignment="Left" Tag="保温材料">
+						<Image Height="20" VerticalAlignment="Top" Source="Images/LookupCoord.png">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="BuildCoord_Copy2" Margin="0,18,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Grid.Column="1" Tag="油气预热" HorizontalAlignment="Left" Width="88">
+						<Image Source="Images/BuildCoord.png">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/SmallIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="LookupCoord_Copy2" Margin="0,0,0,29" VerticalAlignment="Bottom" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Grid.Column="1" Tag="进油结焦" HorizontalAlignment="Left" Width="88">
+						<Image Height="20" VerticalAlignment="Top" Source="Images/LookupCoord.png">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="BuildCoord_Copy3" Margin="88,18,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Grid.Column="1" Width="88" Tag="大小吹汽" HorizontalAlignment="Left">
+						<Image Source="Images/BuildCoord.png" Width="20">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/SmallIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="LookupCoord_Copy3" Margin="88,0,0,29" VerticalAlignment="Bottom" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Small}" Grid.Column="1" Width="88" Tag="给水冷焦" HorizontalAlignment="Left">
+						<Image Height="20" VerticalAlignment="Top" Source="Images/LookupCoord.png" Width="20">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy" Margin="176,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Grid.Column="1" Tag="工况" HorizontalAlignment="Left" Width="40">
+						<Image Height="30" Source="Images/OpenProj.png" Width="30" Tag="" Margin="0">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy1" Margin="80,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="2" Tag="运行设置" HorizontalAlignment="Left">
+						<Image Height="30" Source="Images/OpenProj.png" Width="29">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy2" Margin="140,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="40" Grid.Column="2" Tag="运行" HorizontalAlignment="Left">
+						<Image Height="30" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="CompleteCheck_Copy" Margin="0,15,78,31" Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Tag="工艺参数检查" HorizontalAlignment="Left" Width="80">
+						<Image Height="30" Source="Images/CompleteCheck.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="CompleteCheck_Copy1" Margin="0,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" HorizontalAlignment="Left" Width="70" Grid.Column="0" Tag="模型库引入">
+						<Image Height="30" Source="Images/CompleteCheck.png" HorizontalAlignment="Left" Width="30" Tag="">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="CompleteCheck_Copy2" 
+						Margin="0,15,0,31" Background="{x:Null}" 
+						BorderBrush="{x:Null}" Foreground="White" 
+						Style="{DynamicResource TabButton}" 
+						Height="64" Grid.Column="3"
+						Click="VirtualHeat_Click_1" Tag="虚拟热电隅" HorizontalAlignment="Left" Width="70">
+						<Image Height="30" Source="Images/CompleteCheck.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="CompleteCheck_Copy3" Margin="70,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Grid.Column="3" Width="100" Tag="虚拟应力/应变片" HorizontalAlignment="Left">
+						<Image Height="30" Source="Images/CompleteCheck.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy3" Margin="0,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="40" Grid.Column="4" Tag="表格" HorizontalAlignment="Left" d:LayoutOverrides="GridBox">
+						<Image Height="30" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy4" Margin="40,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="40" Grid.Column="4" Tag="云图" HorizontalAlignment="Left" d:LayoutOverrides="GridBox">
+						<Image Height="30" Source="Images/OpenProj.png" Width="29">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy5" Margin="80,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="4" Tag="温度历程" HorizontalAlignment="Left" d:LayoutOverrides="GridBox">
+						<Image Height="30" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy6" Margin="140,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="50" Grid.Column="4" Tag="变形图" HorizontalAlignment="Left" d:LayoutOverrides="GridBox">
+						<Image Height="30" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy7" Margin="190,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="40" Grid.Column="4" Tag="动画" HorizontalAlignment="Left" d:LayoutOverrides="GridBox">
+						<Image Height="30" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy8" Margin="230,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="40" Grid.Column="4" Tag="报告" HorizontalAlignment="Left" d:LayoutOverrides="GridBox">
+						<Image Height="30" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<TextBlock Margin="0,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" HorizontalAlignment="Center"><Run Language="zh-cn" Text="建模"/></TextBlock>
+					<Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Left" Stretch="Fill" Width="129" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" d:LayoutOverrides="HorizontalAlignment, GridBox"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Right" Stretch="Fill" Width="84" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,124,15.5" Grid.Column="1"/>
+					<TextBlock Margin="0,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="1" HorizontalAlignment="Center"><Run Language="zh-cn" Text="工况"/></TextBlock>
+					<TextBlock Margin="0,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="2" HorizontalAlignment="Center"><Run Language="zh-cn" Text="温度场分析"/></TextBlock>
+					<TextBlock Margin="0,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="3" d:LayoutOverrides="Width" HorizontalAlignment="Center"><Run Language="zh-cn" Text="虚拟传感器"/></TextBlock>
+					<TextBlock Margin="0,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="5" HorizontalAlignment="Center" d:LayoutOverrides="GridBox"><Run Language="zh-cn" Text="结果"/></TextBlock>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="124,0,0,15.5" Grid.Column="1" HorizontalAlignment="Left" Width="84"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,124,15.5" Grid.Column="2" HorizontalAlignment="Right" Width="48"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="3" HorizontalAlignment="Left" Width="43"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="3" HorizontalAlignment="Right" Width="43"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="4" HorizontalAlignment="Left" Width="49.5"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="4" HorizontalAlignment="Right" Width="49.5"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="4" HorizontalAlignment="Left" Width="111" d:LayoutOverrides="GridBox"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="4" HorizontalAlignment="Right" Width="111" d:LayoutOverrides="GridBox"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" HorizontalAlignment="Left" Stretch="Fill" Width="129" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="169,0,0,15.5" d:LayoutOverrides="GridBox"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="2" HorizontalAlignment="Right" Width="48" d:LayoutOverrides="HorizontalAlignment"/>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="HardwarePortTab" Header="硬件接口" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}" Height="20" Margin="-13,0,0,0" HorizontalAlignment="Left">
+				<Grid x:Name="HardwarePortButton" Background="{DynamicResource 61\,61\,61}" Width="840" HorizontalAlignment="Left" Margin="5,0,0,0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="130"/>
+						<ColumnDefinition Width="350"/>
+						<ColumnDefinition Width="120"/>
+						<ColumnDefinition Width="240"/>
+					</Grid.ColumnDefinitions>
+					<Button x:Name="导入模型_Copy9" Margin="80,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="50" Tag="热电隅" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="CompleteCheck_Copy5" Margin="0,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Tag="应力/应变片" Width="80" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy10" Margin="0,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="50" Grid.Column="1" Tag="全站仪" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy11" Margin="50,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="1" Tag="状态检查" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy12" Margin="110,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="1" Tag="启动监控" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30.18">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy13" Margin="170,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="1" Tag="暂停监控" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy14" Margin="230,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="1" Tag="停止监控" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy15" Margin="290,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="1" Tag="数据比对" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy16" Margin="0,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="2" Tag="输出设置" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy17" Margin="60,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="2" Tag="警告设置" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy18" Margin="0,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="3" Tag="历史数据" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy19" Margin="60,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="3" Tag="数据处理" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy20" Margin="120,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="3" Tag="数据分析" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<Button x:Name="导入模型_Copy21" Margin="180,15,0,31" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" Grid.Column="3" Tag="数据查找" HorizontalAlignment="Left">
+						<Image Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" Width="30">
+							<Image.OpacityMask>
+								<ImageBrush ImageSource="Images/LargeIcon.png"/>
+							</Image.OpacityMask>
+						</Image>
+					</Button>
+					<TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" d:LayoutOverrides="Width" HorizontalAlignment="Center"><Run Language="zh-cn" Text="传感器布置"/></TextBlock>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" HorizontalAlignment="Left" Width="23"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" HorizontalAlignment="Right" Width="23"/>
+					<TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" HorizontalAlignment="Center" Grid.Column="1"><Run Language="zh-cn" Text="实时监控"/></TextBlock>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" HorizontalAlignment="Left" Width="139" Grid.Column="1"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" HorizontalAlignment="Right" Width="139" Grid.Column="1"/>
+					<TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="2" d:LayoutOverrides="Width" HorizontalAlignment="Center"><Run Language="zh-cn" Text="设置"/></TextBlock>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="2" HorizontalAlignment="Left" Width="36"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="2" HorizontalAlignment="Right" Width="36"/>
+					<TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="3" d:LayoutOverrides="Width" HorizontalAlignment="Center"><Run Language="zh-cn" Text="数据分析"/></TextBlock>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" Grid.Column="3" HorizontalAlignment="Left" Width="84"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,8,15.5" Grid.Column="3" HorizontalAlignment="Right" Width="84"/>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="SecurityEvaluationTab" Header="安全评估" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}" Height="20" Margin="-13,0,0,0" HorizontalAlignment="Left">
+				<Grid x:Name="SecurityEvaluationButton" Background="{DynamicResource 61\,61\,61}">
+					<TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" HorizontalAlignment="Center"><Run Language="zh-cn" Text="建模"/></TextBlock>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="8,0,0,15.5" HorizontalAlignment="Left" Width="49.2"/>
+					<Button x:Name="导入模型_Copy23" Content="高温蠕变" Margin="146.623,14.934,1013.377,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
+					<Image Margin="161.012,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment">
+						<Image.OpacityMask>
+							<ImageBrush ImageSource="Images/LargeIcon.png"/>
+						</Image.OpacityMask>
+					</Image>
+					<Button x:Name="导入模型_Copy24" Content="耦合分析" Margin="207.623,14.934,952.377,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
+					<Image Margin="222.012,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment">
+						<Image.OpacityMask>
+							<ImageBrush ImageSource="Images/LargeIcon.png"/>
+						</Image.OpacityMask>
+					</Image>
+					<Button x:Name="导入模型_Copy25" Content="硫腐蚀" Margin="268.623,14.934,891.377,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
+					<Image Margin="283.012,21.75,0,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Left" Width="30.18" d:LayoutOverrides="VerticalAlignment">
+						<Image.OpacityMask>
+							<ImageBrush ImageSource="Images/LargeIcon.png"/>
+						</Image.OpacityMask>
+					</Image>
+					<Button x:Name="导入模型_Copy32" Content="数据处理" Margin="698.653,14.934,461.347,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
+					<Image Margin="0,21.75,476.748,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" d:LayoutOverrides="VerticalAlignment">
+						<Image.OpacityMask>
+							<ImageBrush ImageSource="Images/LargeIcon.png"/>
+						</Image.OpacityMask>
+					</Image>
+					<Button x:Name="导入模型_Copy33" Content="数据分析" Margin="759.653,14.934,400.347,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
+					<Image Margin="0,21.75,416.128,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" d:LayoutOverrides="VerticalAlignment">
+						<Image.OpacityMask>
+							<ImageBrush ImageSource="Images/LargeIcon.png"/>
+						</Image.OpacityMask>
+					</Image>
+					<Button x:Name="导入模型_Copy34" Content="数据查找" Margin="821.653,14.934,338.347,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60"/>
+					<Image Margin="0,21.75,354.128,0" Height="30" VerticalAlignment="Top" Source="Images/OpenProj.png" HorizontalAlignment="Right" Width="30" d:LayoutOverrides="VerticalAlignment">
+						<Image.OpacityMask>
+							<ImageBrush ImageSource="Images/LargeIcon.png"/>
+						</Image.OpacityMask>
+					</Image>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="89.2,0,0,15.5" HorizontalAlignment="Left" Width="49.2"/>
+					<TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" HorizontalAlignment="Center" Grid.Column="1"><Run Language="zh-cn" Text="建模"/></TextBlock>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="154.4,0,0,15.5" HorizontalAlignment="Left" Width="159"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="345.4,0,0,15.5" HorizontalAlignment="Left" Width="159"/>
+					<TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="2" HorizontalAlignment="Center"><Run Language="zh-cn" Text="建模"/></TextBlock>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="520.4,0,0,15.5" HorizontalAlignment="Left" Width="38.22"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="590.62,0,591.16,15.5"/>
+					<TextBlock Margin="0,0,0,9.999" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="{DynamicResource Text Grey}" Height="15" Grid.Column="3" HorizontalAlignment="Center"><Run Language="zh-cn" Text="建模"/></TextBlock>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,475.94,15.5" HorizontalAlignment="Right" Width="99.22"/>
+					<Path Data="M7,100.36333 L71.653593,100.36333" Stretch="Fill" Stroke="{DynamicResource 99\,99\,99}" Height="1" VerticalAlignment="Bottom" Margin="0,0,344.72,15.5" HorizontalAlignment="Right" Width="99.22"/>
+					<Button x:Name="BuildNewProj_Copy" Content="低周疲劳" Margin="8.223,14.934,0,31.066" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton}" Height="64" Width="60" HorizontalAlignment="Left" d:LayoutOverrides="Width"/>
+					<Image Height="30" VerticalAlignment="Top" Width="30" HorizontalAlignment="Left" Source="Images/BuildNewProj.png" Margin="23.5,21,0,0" d:LayoutOverrides="VerticalAlignment">
+						<Image.OpacityMask>
+							<ImageBrush ImageSource="Images/LargeIcon.png" Stretch="None"/>
+						</Image.OpacityMask>
+					</Image>
+					<Button x:Name="CompleteCheck_Copy4" Content="低弹性损伤" Margin="69.268,14.756,0,31.243" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Large}" Height="64" HorizontalAlignment="Left" Width="80" d:LayoutOverrides="VerticalMargin"/>
+					<Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="94.618,21,0,0" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment">
+						<Image.OpacityMask>
+							<ImageBrush ImageSource="Images/LargeIcon.png"/>
+						</Image.OpacityMask>
+					</Image>
+					<Button x:Name="CompleteCheck_Copy6" Content="环烷酸腐蚀" Margin="329.268,14.756,0,31.243" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Large}" Height="64" HorizontalAlignment="Left" Width="80" d:LayoutOverrides="VerticalMargin"/>
+					<Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="354.618,21,0,0" HorizontalAlignment="Left" Width="30" d:LayoutOverrides="VerticalAlignment">
+						<Image.OpacityMask>
+							<ImageBrush ImageSource="Images/LargeIcon.png"/>
+						</Image.OpacityMask>
+					</Image>
+					<Button x:Name="CompleteCheck_Copy8" Content="塔身热棘轮效应" Margin="410.143,14.756,0,31.243" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource TabButton Extra Large}" Height="64" Width="100" d:LayoutOverrides="Width, VerticalMargin" HorizontalAlignment="Left"/>
+					<Image Height="30" VerticalAlignment="Top" Source="Images/CompleteCheck.png" Margin="444.718,21,0,0" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Left" Width="30">
+						<Image.OpacityMask>
+							<ImageBrush ImageSource="Images/LargeIcon.png"/>
+						</Image.OpacityMask>
+					</Image>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="DataBaseTab" Header="数据" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}" Margin="-13,0,0,0" Height="20" HorizontalAlignment="Left">
+				<Grid Background="{DynamicResource 61\,61\,61}"/>
+			</TabItem>
+			<TabItem x:Name="ToolBoxTab" Header="工具箱" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}" Height="20" Margin="-13,0,0,0" HorizontalAlignment="Left">
+				<Grid Background="{DynamicResource 61\,61\,61}"/>
+			</TabItem>
+			<TabItem x:Name="HelpInfoTab" Header="帮助" Width="80" Foreground="White" Background="{DynamicResource 61\,61\,61}" BorderBrush="{x:Null}"  Height="20" Margin="-13,0,0,0" HorizontalAlignment="Left">
+				<Grid Background="{DynamicResource 61\,61\,61}"/>
+			</TabItem>
+		</TabControl>
         <Grid x:Name="WorkSpaceGlobal" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
             <Grid x:Name="WorkSpaceLeft" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="140"></RowDefinition>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="140"/>
                 </Grid.RowDefinitions>
-                <WindowsFormsHost Grid.Row="0" Name="winform" Padding="5" Margin="10,0,10,10">
-                </WindowsFormsHost>
-                <GridSplitter Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"></GridSplitter>
-                <Grid Name="WorkSpaceNoticeGrid" Grid.Row="1" Grid.Column="0">
+                <WindowsFormsHost Grid.Row="0" x:Name="winform" Padding="5" Margin="0,0,0,10"/>
+                <GridSplitter Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+                <Grid x:Name="WorkSpaceNoticeGrid" Grid.Row="1" Grid.Column="0">
                     <DataGrid x:Name ="gridNoticeData" AutoGenerateColumns="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="序号" Width="175"></DataGridTextColumn>
-                            <DataGridTextColumn Header="运行信息" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="序号" Width="175"/>
+                            <DataGridTextColumn Header="运行信息" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </Grid>
-			<Grid Width="280" Background="{DynamicResource 61\,61\,61}" Grid.Column="1">
+			<Grid Width="280" Background="{DynamicResource 61\,61\,61}" Grid.Column="1" HorizontalAlignment="Right">
 				<Grid x:Name="随便起个名字" Background="{DynamicResource 99\,99\,99}" Height="20" VerticalAlignment="Top" Margin="0" Width="280">
 					<TextBlock Margin="0" TextWrapping="Wrap" d:LayoutOverrides="Height" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"><Run Language="zh-cn" Text="随便起个名字"/></TextBlock>
 				</Grid>

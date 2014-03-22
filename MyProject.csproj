@@ -32,6 +32,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20621.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -67,16 +69,14 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kitware.mummy.Runtime, Version=1.0.2.599, Culture=neutral, PublicKeyToken=995c7fb9db2c1b44, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\ActiViz.NET 5.8.0 OpenSource Edition\bin\Kitware.mummy.Runtime.dll</HintPath>
+    <Reference Include="Kitware.mummy.Runtime">
+      <HintPath>C:\Users\kyzamiz\Desktop\PartTimeShitJob\MyProject\MyProject\bin\Debug\Kitware.mummy.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Kitware.VTK, Version=5.8.0.607, Culture=neutral, PublicKeyToken=995c7fb9db2c1b44, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\ActiViz.NET 5.8.0 OpenSource Edition\bin\Kitware.VTK.dll</HintPath>
+    <Reference Include="Kitware.VTK">
+      <HintPath>C:\Users\kyzamiz\Desktop\PartTimeShitJob\MyProject\MyProject\bin\Debug\Kitware.VTK.dll</HintPath>
     </Reference>
     <Reference Include="NDatabase3">
-      <HintPath>..\..\..\Downloads\NDatabase.3.8-v4.0\NDatabase3.dll</HintPath>
+      <HintPath>C:\Users\kyzamiz\Desktop\PartTimeShitJob\MyProject\MyProject\bin\Debug\NDatabase3.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="PresentationFramework.Classic" />
@@ -94,29 +94,21 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Telerik.Windows.Controls">
-      <HintPath>..\..\..\..\Program Files\Telerik\RadControls for WPF Q2 2013\Binaries\WPF40\Telerik.Windows.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Navigation">
-      <HintPath>..\..\..\..\Program Files\Telerik\RadControls for WPF Q2 2013\Binaries\WPF40\Telerik.Windows.Controls.Navigation.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Data">
-      <HintPath>..\..\..\..\Program Files\Telerik\RadControls for WPF Q2 2013\Binaries\WPF40\Telerik.Windows.Data.dll</HintPath>
+    <Reference Include="Telerik.Windows.Controls.Charting">
+      <HintPath>C:\Users\kyzamiz\Desktop\PartTimeShitJob\MyProject\MyProject\bin\Debug\Telerik.Windows.Controls.Charting.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RibbonControlsLibrary" />
-    <Reference Include="Microsoft.Windows.Shell" />
     <Reference Include="WindowsFormsIntegration" />
     <Reference Include="WPFToolkit">
       <HintPath>Z:\Users\ArthasZRZ\Downloads\51CTO下载-visifire_v4.0.2\WPF Binaries\WPFToolkit.dll</HintPath>
     </Reference>
     <Reference Include="WPFVisifire.Charts">
-      <HintPath>Z:\Users\ArthasZRZ\Downloads\51CTO下载-visifire_v4.0.2\WPF Binaries\WPFVisifire.Charts.dll</HintPath>
+      <HintPath>C:\Users\kyzamiz\Desktop\PartTimeShitJob\MyProject\MyProject\bin\Debug\WPFVisifire.Charts.dll</HintPath>
     </Reference>
     <Reference Include="WPFVisifire.Gauges">
-      <HintPath>Z:\Users\ArthasZRZ\Downloads\51CTO下载-visifire_v4.0.2\WPF Binaries\WPFVisifire.Gauges.dll</HintPath>
+      <HintPath>C:\Users\kyzamiz\Desktop\PartTimeShitJob\MyProject\MyProject\bin\Debug\WPFVisifire.Gauges.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +215,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="GridModel.png" />
     <Resource Include="Images\LargeIcon.png" />
     <Resource Include="Images\SmallIcon.png" />
   </ItemGroup>
