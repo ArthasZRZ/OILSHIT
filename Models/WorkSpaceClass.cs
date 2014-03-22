@@ -13,7 +13,7 @@ namespace WpfRibbonApplication1
         public string ROOT_DIR { set; get; }
         public string DBNAME { set; get; }
         public TowerModel TowerModelInstance = null;
-        public List<Models.HeatDoubler> HeatDoublerInstances = null;
+        public Models.HeatDoublers HeatDoublerInstances = null;
         public WorkSpaceCategory Category = null;
 
         public WorkSpaceClass()
@@ -21,12 +21,12 @@ namespace WpfRibbonApplication1
             NLIST_FILENAME = "";
             ELIST_FILENAME = "";
             TowerModelInstance = new TowerModel();
-            HeatDoublerInstances = new List<Models.HeatDoubler>();
+            HeatDoublerInstances = new Models.HeatDoublers();
             ROOT_DIR = "";
             Category = new WorkSpaceCategory();
         }
         public WorkSpaceClass(string nfilename, string efilename, string rootdir,
-            string dbname, TowerModel twmodel, List<Models.HeatDoubler> hdinst,
+            string dbname, TowerModel twmodel, Models.HeatDoublers hdinst,
             WorkSpaceCategory Category)
         {
             NLIST_FILENAME = nfilename;

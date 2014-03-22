@@ -511,7 +511,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="140"></RowDefinition>
                 </Grid.RowDefinitions>
-                <WindowsFormsHost Grid.Row="0" Name="winform" Padding="5" Margin="10,0,10,10">
+                <WindowsFormsHost Grid.Row="0" x:Name="winform" Padding="5" Margin="10,0,10,10">
                 </WindowsFormsHost>
                 <GridSplitter Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"></GridSplitter>
                 <Grid Name="WorkSpaceNoticeGrid" Grid.Row="1" Grid.Column="0">
@@ -557,7 +557,7 @@
 						<TreeViewItem Header="TreeViewItem" Foreground="White"/>
 					</TreeViewItem>
 				</TreeView>
-				<Button Content="重新生成模型" HorizontalAlignment="Right" Margin="0,0,10,10" 
+				<Button Content="生成模型" HorizontalAlignment="Right" Margin="0,0,10,10" 
                         VerticalAlignment="Bottom" Width="100" Background="{DynamicResource 75\,75\,75}" 
                         Foreground="White" Height="21" Style="{DynamicResource Button Simple}"
                         Click="ComfirmSettingButton_Click_1"/>

@@ -31,6 +31,7 @@ namespace WpfRibbonApplication1
         //public static NoticeFromBuilding NoticeInstance = null;
         public static Models.StoreDB storeDB = null;
         public static Boolean is3Dready = false;
+        public static FormParas paras = null;
 
         public MainWindow()
         {
@@ -40,9 +41,13 @@ namespace WpfRibbonApplication1
 
             //WorkSpaceInfo.DataContext = WorkSpaceInstance;
             // Insert code required on object creation below this point.
-            FormParas paras = new FormParas();
+            paras = new FormParas();
             paras.RotateAngle = 180;
             paras.UsingEdges = 1;
+            paras.Using3DTower = 0;
+            paras.UsingVirtualHeater = 0;
+            paras.Width = winform.Width;
+            paras.Height = winform.Height;
 
             Form1 form = new Form1(paras);
             form.TopLevel = false;
@@ -139,16 +144,22 @@ namespace WpfRibbonApplication1
 
         private void ComfirmSettingButton_Click_1(object sender, RoutedEventArgs e)
         {
-            FormParas paras = new FormParas();
             paras.RotateAngle = System.Convert.ToInt16(AngleBox.Text);
             paras.UsingEdges = SchemeBox.SelectedIndex;
+            
             //MessageBox.Show(paras.UsingEdges.ToString());
+            is3Dready = true;
+
+            BuildForm();
+        }
+
+        public void BuildForm()
+        {
             is3Dready = true;
             Form1 form = new Form1(paras);
             form.TopLevel = false;
             winform.Child = form;
         }
-        
     }
 }
 

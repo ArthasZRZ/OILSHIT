@@ -223,11 +223,8 @@ namespace WpfRibbonApplication1
                 tmpElem = srElem.ReadLine();
             }
 
-            //MessageBox.Show(ElemListSize.ToString() + " " + NodeListSize.ToString());
-            //DrawModel();
-            MessageBox.Show("Done");
-            //System.IO.StreamWriter file = new System.IO.StreamWriter(@"E:\testttt.txt", true);
-            //BuildPointCloud();
+            MainWindow.paras.Using3DTower = 1;
+
         }
 
         public int cnt = 0;
@@ -465,6 +462,25 @@ namespace WpfRibbonApplication1
                 }
             }
            
+        }
+
+        public void VTKLabelGetter(ref vtkPoints pointsrc, ref vtkStringArray strArr, ref vtkCellArray cellArr )
+        {
+            Models.HeatDoublers hdlist = MainWindow.WorkSpaceInstance.HeatDoublerInstances;
+
+            //MessageBox.Show(hdlist.listSize.ToString());
+
+            strArr.SetNumberOfValues(hdlist.listSize);
+       
+            strArr.SetName("111");
+            for (int i = 0; i < hdlist.listSize; i++)
+            {
+                pointsrc.InsertNextPoint(hdlist.list[i].X, 0, hdlist.list[i].Y);
+                strArr.SetValue(i, hdlist.list[i].Name);
+                //MessageBox.Show(hdlist.list[i].Name);
+                cellArr.InsertNextCell(1);
+                cellArr.InsertCellPoint(i);
+            }
         }
     }
 }

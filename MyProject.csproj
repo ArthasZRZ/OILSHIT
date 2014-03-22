@@ -144,7 +144,7 @@
       <DependentUpon>ImportModelWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\CSVReader.cs" />
-    <Compile Include="Models\HeatDoubler.cs" />
+    <Compile Include="Models\HeatDoublers.cs" />
     <Compile Include="Models\StoreDB.cs" />
     <Compile Include="Models\StringConverter.cs" />
     <Compile Include="Views\OpenProjWindow.xaml.cs">
